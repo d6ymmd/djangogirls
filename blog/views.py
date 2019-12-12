@@ -24,18 +24,22 @@ def post_list(request):
     return render(request, 'post_list.html', context)
 
 
-def post_detail(request):
+def post_detail(request, pk):
 
-    post = Post.objects.all()[0]
+    # post = Post.objects.all()[pk-1] -> 이렇게 해도 나오는데 왜 아닌가?
+    # posts = Post.objects.filter(pk=pk)[0]
+    # post = posts[0]
     context = {
         'post': post,
     }
 
     # 특정키로 접근하면 value를 바로 갖다쓰면 되니까... 딕셔너리 형태로 정의(없으면 value만으로 알기 좀....?)
 
-    # 1.전체 포스트목록(포스트전체 쿼리셋)중 [0]번 인덱스에 해당하는 post객체 하나를 포스트 변수에 할당
-    # 2.'context'라는 이름의 딕트를 만들며 'post'key에  위 post변수를 value로 사용한다
-    # 3. post_detail.html에서 전달받은 'post'변수의 title, author, text, created_date, published_date를 적절히 출력해준다
+    try:
+        post = Post.objects.get(pk=pk)
+    except:
+        return HttpResponse('없음')
+
+
+
     return render(request, 'post_detail.html', context)
-
-
