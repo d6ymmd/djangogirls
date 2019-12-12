@@ -1,5 +1,5 @@
+from django.http import HttpResponse
 from django.shortcuts import render
-
 from blog.models import Post
 
 
@@ -29,17 +29,14 @@ def post_detail(request, pk):
     # post = Post.objects.all()[pk-1] -> 이렇게 해도 나오는데 왜 아닌가?
     # posts = Post.objects.filter(pk=pk)[0]
     # post = posts[0]
-    context = {
-        'post': post,
-    }
-
-    # 특정키로 접근하면 value를 바로 갖다쓰면 되니까... 딕셔너리 형태로 정의(없으면 value만으로 알기 좀....?)
 
     try:
         post = Post.objects.get(pk=pk)
     except:
         return HttpResponse('없음')
 
-
+    context = {
+        'post': post,
+    }
 
     return render(request, 'post_detail.html', context)
