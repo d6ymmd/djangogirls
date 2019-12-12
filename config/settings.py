@@ -42,7 +42,7 @@ INSTALLED_APPS = [
 
     'django_extensions',
 
-    # 이 패키지는 application 취급
+    # 이 패키지는 application 취급(application 생성후 장고에 사용한다고 알려주는 과정)
     'blog',
 ]
 

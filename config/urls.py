@@ -17,9 +17,14 @@ from django.contrib import admin
 from django.urls import path
 
 from blog.views import post_list
+from blog.views import post_detail
+
+#import 쉼표로 구분해도 됨
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # post-list라는 URL에 온 요청은 blog.views.post_list함수가 처리한다
     path('post-list/', post_list),
+    path('post-detail/', post_detail),
 ]
