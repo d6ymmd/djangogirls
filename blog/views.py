@@ -1,7 +1,8 @@
-from django.http import HttpResponse
-from django.shortcuts import render
-from blog.models import Post
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect
+from django.urls import reverse
 
+from blog.models import Post
 
 def post_list(request):
     # Template을 찾을 경로에서
@@ -16,7 +17,7 @@ def post_list(request):
     # 2. context라는 dict를 생성하며, 'posts'키에 위 posts변수를 value로 사용하도록 한다
     # 3. render의 3번째 위치인자로 위 context변수를 전달한다
 
-    posts = Post.objects.all()
+    posts = Post.objects.order_by('-pk')
     context = {
         'posts': posts,
     }
@@ -57,8 +58,11 @@ def post_add(request):
             text=text,
         )
 
-        result = f'title: {post.title}, created_date: {post.created_date }'
-        return HttpResponse(result)
+        result = f'title: {post.title}, created_date: {post.created_date}'
+
+        # post_list_url = reverse('url-name-post-list')
+        # return HttpResponseRedirect('/posts/')
+        return redirect('url-name-post-list')
     else:
 
         return render(request, 'post_add.html')
