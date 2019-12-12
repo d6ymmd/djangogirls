@@ -2,18 +2,19 @@
 
 {% block content %}
 
-    {% for post in posts %}
-        <div class="card mb-3">
-            <div class="card-body">
+{% for post in posts %}
+<div class="card mb-3">
+    <div class="card-body">
 
-                <h5 class="card-title"><a href="/post-detail/{{ post.pk }}/">{{ post.title }}</a></h5>
-                <p class="card-text">{{ post.text|linebreaksbr|truncatechars:200}}</p>
-                <div class="text-right">
-                    <span>{{ post.created_date }}</span>
-                </div>
-            </div>
+        <h5 class="card-title">
+            <a href="{% url 'url-name-post-detail' pk=post.pk %}">{{ post.title }}</a></h5>
+        <p class="card-text">{{ post.text|linebreaksbr|truncatechars:200}}</p>
+        <div class="text-right">
+            <span>{{ post.created_date }}</span>
         </div>
-    {% endfor %}
+    </div>
+</div>
+{% endfor %}
 
 {% endblock %}
 

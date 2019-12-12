@@ -25,7 +25,7 @@ from blog.views import post_detail
 urlpatterns = [
     path('admin/', admin.site.urls),
     # post-list라는 URL에 온 요청은 blog.views.post_list함수가 처리한다
-    path('post-list/', post_list),
-    path('post-detail/<int:pk>/', post_detail),
+    path('posts/', post_list, name='url-name-post-list'),
+    path('post-detail/<int:pk>/', post_detail, name='url-name-post-detail'),
     #detaiL뒤에 int가 올 건데 이걸 pk라고 하자!
 ]
