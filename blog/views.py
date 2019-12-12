@@ -43,7 +43,24 @@ def post_detail(request, pk):
 
 
 def post_add(request):
+    if request.method == 'POST':
+        author = request.user
+        title = request.POST['title']
+        text = request.POST['text']
+        #위 세개 이용, 새로운 Post생성
+        #생성한 Post의 title과 created_date를 HttpResponse에 적절한
+        #문자열로 전달
+        #출력 title:제목, created_date: <적당한 값>
+        post = Post.objects.create(
+            author=author,
+            title=title,
+            text=text,
+        )
 
-    return render(request, 'post_add.html')
+        result = f'title: {post.title}, created_date: {post.created_date }'
+        return HttpResponse(result)
+    else:
+
+        return render(request, 'post_add.html')
 
 
