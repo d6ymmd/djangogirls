@@ -18,6 +18,7 @@ from django.urls import path
 
 from blog.views import post_list
 from blog.views import post_detail
+from blog.views import post_add
 
 #import 쉼표로 구분해도 됨
 
@@ -28,4 +29,5 @@ urlpatterns = [
     path('posts/', post_list, name='url-name-post-list'),
     path('post-detail/<int:pk>/', post_detail, name='url-name-post-detail'),
     #detaiL뒤에 int가 올 건데 이걸 pk라고 하자!
+    path('posts/add/', post_add, name='url-name-post-add'),
 ]
